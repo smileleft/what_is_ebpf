@@ -1,1 +1,0 @@
-savedcmd_/home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/modules.order := {   echo /home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/hello.o; :; } > /home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/modules.order
