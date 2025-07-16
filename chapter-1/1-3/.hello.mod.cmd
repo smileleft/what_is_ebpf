@@ -1,0 +1,1 @@
+savedcmd_/home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/hello.mod := printf '%s\n'   hello.o | awk '!x[$$0]++ { print("/home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/"$$0) }' > /home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/hello.mod

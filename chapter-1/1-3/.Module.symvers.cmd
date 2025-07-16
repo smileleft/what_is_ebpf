@@ -1,0 +1,1 @@
+savedcmd_/home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/Module.symvers -T /home/smileleft/Projects/what_is_ebpf/chapter-1/1-3/modules.order -i Module.symvers -e 
