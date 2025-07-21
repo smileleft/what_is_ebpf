@@ -57,9 +57,8 @@ eBPF self-study guide for Beginners
 ### 9. **고급 주제 및 확장**
 
 - 9.1 BTF, CO-RE (Compile Once – Run Everywhere)
-- 9.2 libbpf-bootstrap로 사용자 공간 프로그램 작성
-- 9.3 eBPF 성능 최적화 전략
-- 9.4 eBPF를 활용한 실시간 모니터링 대시보드 구축 (ex: Grafana, Prometheus 연동)
+- 9.2 eBPF 성능 최적화 전략
+- 9.3 eBPF를 활용한 실시간 모니터링 대시보드 구축 (ex: Grafana, Prometheus 연동)
 
 ### 10. **프로젝트 실습 및 포트폴리오**
 
