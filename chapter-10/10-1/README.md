@@ -42,3 +42,13 @@ ebpf-l7-loadbalancer/
 ```
 
 ---
+
+## 4. 실행
+```
+bpftool btf dump file /sys/kernel/btf/vmlinux format c > vmlinux.h
+cd ebpf-l7-loadbalancer
+./scripts/setup.sh            # 네트워크 인터페이스 세팅
+./scripts/build.sh            # eBPF 빌드
+sudo ./build/user_loader      # 프로그램 eth0 에 attach
+sudo cat /sys/kernel/debug/tracing/trace_pipe
+```
