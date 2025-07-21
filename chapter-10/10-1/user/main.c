@@ -1,23 +1,39 @@
 #include <bpf/libbpf.h>
 #include <net/if.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int main() {
     struct bpf_object *obj;
-    int prog_fd, map_fd;
+    int prog_fd;
 
     obj = bpf_object__open_file("build/l7_filter_kern.o", NULL);
-    bpf_object__load(obj);
-    prog_fd = bpf_program__fd(bpf_object__find_program_by_title(obj, "xdp_l7_filter"));
+    if (libbpf_get_error(obj)) {
+        fprintf(stderr, "Failed to open BPF object\n");
+        return 1;
+    }
 
+    if (bpf_object__load(obj)) {
+        fprintf(stderr, "Failed to load BPF object\n");
+        return 1;
+    }
+
+    struct bpf_program *prog = bpf_object__find_program_by_name(obj, "xdp_l7_filter");
+    if (!prog) {
+        fprintf(stderr, "Failed to find BPF program\n");
+        return 1;
+    }
+
+    prog_fd = bpf_program__fd(prog);
     int ifindex = if_nametoindex("eth0");
-    bpf_set_link_xdp_fd(ifindex, prog_fd, XDP_FLAGS_UPDATE_IF_NOEXIST);
 
-    // map 업데이트 예시
-    map_fd = bpf_object__find_map_fd_by_name(obj, "rule_map");
-    const char *key = "/blocked-path";
-    __u32 action = 0; // 0=drop
-    bpf_map_update_elem(map_fd, key, &action, BPF_ANY);
+    if (bpf_set_link_xdp_fd(ifindex, prog_fd, 0) < 0) {
+        perror("bpf_set_link_xdp_fd");
+        return 1;
+    }
 
+    printf("eBPF program successfully attached to eth0\n");
     return 0;
 }
 

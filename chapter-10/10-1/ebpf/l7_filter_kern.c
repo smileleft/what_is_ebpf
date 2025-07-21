@@ -1,3 +1,10 @@
+#include "vmlinux.h"
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_endian.h>
+#include "maps.h"
+
+char LICENSE[] SEC("license") = "Dual BSD/GPL";
+
 SEC("xdp")
 int xdp_l7_filter(struct xdp_md *ctx) {
     void *data_end = (void *)(long)ctx->data_end;
